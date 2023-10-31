@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Soim_Adrian_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Soim_Adrian_Lab2.Data;
 namespace Soim_Adrian_Lab2.Migrations
 {
     [DbContext(typeof(Soim_Adrian_Lab2Context))]
-    partial class Soim_Adrian_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20231031113127_bookCat")]
+    partial class bookCat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
