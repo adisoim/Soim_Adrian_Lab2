@@ -21,5 +21,6 @@ namespace Soim_Adrian_Lab2.Data
         public DbSet<Soim_Adrian_Lab2.Models.Author>? Author { get; set; }
 
         public DbSet<Soim_Adrian_Lab2.Models.Category>? Category { get; set; }
+        public DbSet<BookCategory> BookCategory { get; set; }
     }
 }

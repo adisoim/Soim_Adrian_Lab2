@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Soim_Adrian_Lab2.Data;
 using Soim_Adrian_Lab2.Models;
+using Soim_Adrian_Lab2.Models.ViewModels;
 
 namespace Soim_Adrian_Lab2.Pages.Categories
 {
@@ -21,11 +22,30 @@ namespace Soim_Adrian_Lab2.Pages.Categories
 
         public IList<Category> Category { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public CategoryIndexData CategoryIndexData { get; set; }
+        public BookData BookD { get; set; }
+        public int CategoryID { get; set; }
+        public int BookID { get; set; }
+        public async Task OnGetAsync(int? id,int? bookID)
         {
-            if (_context.Category != null)
+            BookD = new BookData();
+            BookD.Categories = await _context.Category
+                .Include(b => b.BookCategories)
+                .ThenInclude(b => b.Book)
+                .OrderBy(b => b.CategoryName)
+                .ToListAsync();
+            BookD.BookCategories = await _context.BookCategory
+                .Include(b => b.Category)
+                .Include(b => b.Book)
+                .OrderBy(b => b.Book)
+                .ToListAsync();
+            if (id != null)
             {
-                Category = await _context.Category.ToListAsync();
+                CategoryID = id.Value;
+                BookD.Books = await _context.BookCategory
+                .Where(bc => bc.CategoryID == CategoryID)
+                .Select(bc => bc.Book)
+                .ToListAsync();
             }
         }
     }
