@@ -11,6 +11,5 @@ namespace Soim_Adrian_Lab2.Models
         public Book? Book { get; set; }
         [DataType(DataType.Date)]
         public DateTime ReturnDate { get; set; }
-
     }
 }
